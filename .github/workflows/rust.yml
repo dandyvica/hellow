@@ -28,6 +28,7 @@ jobs:
     - name: Build
       run: |
         ls -al
+        pwd
         cargo build --release
         cargo build --release --target x86_64-unknown-linux-musl
 
