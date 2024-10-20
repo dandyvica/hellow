@@ -31,10 +31,13 @@ jobs:
         pwd
         cargo build --release
         cargo build --release --target x86_64-unknown-linux-musl
-    - name: Archive compilation target
+        export TRIPLE=$(rustc -vV | sed -n 's|host: ||p')
+        echo $TRIPLE
+    - name: Archive compilation target for ${{ matrix.os }}-${{ matrix.version }}
       uses: actions/upload-artifact@v4
       with:
-        name: hellow
+        name: hellow-x86_64-unknown-linux-gnu
         path: target/release/hellow
+
 
 
