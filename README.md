@@ -1,0 +1,1 @@
+[![Actions](https://github.com/dandyvica/hellow/actions/workflows/rust.yml/badge.svg)](https://github.com/dandyvica/hellow/actions/workflows/rust.yml)
