@@ -34,7 +34,7 @@ jobs:
     - name: Archive compilation target
       uses: actions/upload-artifact@v4
       with:
-        name: target
+        name: hellow
         path: target/release/hellow
 
 
