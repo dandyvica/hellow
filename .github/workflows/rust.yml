@@ -24,6 +24,7 @@ jobs:
     - uses: dtolnay/rust-toolchain@master
       with:
         toolchain: stable
+        targets: x86_64-unknown-linux-musl
     - name: Build
       run: |
         ls -al
