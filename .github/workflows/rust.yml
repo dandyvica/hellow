@@ -24,19 +24,19 @@ jobs:
     - uses: dtolnay/rust-toolchain@master
       with:
         toolchain: stable
-        targets: x86_64-unknown-linux-musl
-    - name: Build for ${{ runner.os }}
+        targets: x86_64-unknown-linux-gnu,x86_64-unknown-linux-musl
+    - name: Building on ${{ runner.os }}-${{ runner.arch }}
       run: |
         ls -al
         pwd
         cargo build --release
         cargo build --release --target x86_64-unknown-linux-musl
         export TRIPLE=$(rustc -vV | sed -n 's|host: ||p')
-        echo $TRIPLE >> $GITHUB_ENV
+        echo $TRIPLE
     - name: Archive compilation target for ${{ matrix.os }}-${{ matrix.version }}
       uses: actions/upload-artifact@v4
       with:
-        name: hellow-{{ env.TRIPLE }}
+        name: hellow
         path: target/release/hellow
 
 
