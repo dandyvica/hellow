@@ -27,7 +27,7 @@ jobs:
         targets: x86_64-unknown-linux-gnu,x86_64-unknown-linux-musl
     - name: Building on ${{ runner.os }}-${{ runner.arch }}
       run: |
-        ls -al
+        ls -al >foo
         echo "TRIPLE=$(rustc -vV | sed -n 's|host: ||p')" >> $GITHUB_ENV
         echo ${{ env.TRIPLE }}
         # cargo build --release
@@ -36,11 +36,11 @@ jobs:
         # echo "TRIPLE=$(rustc -vV | sed -n 's|host: ||p')" >> $GITHUB_ENV
         # echo $TRIPLE
       shell: bash
-    # - name: Archive compilation target for ${{ matrix.os }}-${{ matrix.version }}
-    #   uses: actions/upload-artifact@v4
-    #   with:
-    #     name: hellow-${{ env.TRIPLE }}
-    #     path: target/release/hellow
+    - name: Archive compilation target for ${{ matrix.os }}-${{ matrix.version }}
+      uses: actions/upload-artifact@v4
+      with:
+        name: foo-${{ env.TRIPLE }}
+        path: foo
 
 
 
