@@ -15,31 +15,17 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-20.04, windows-latest, macos-latest, macos-13]
+        os: [ubuntu-latest]
         toolchain:
           - stable
 
     steps:
     - uses: actions/checkout@v4
-    - uses: dtolnay/rust-toolchain@master
-      with:
-        toolchain: stable
-        # targets: x86_64-unknown-linux-gnu,x86_64-unknown-linux-musl
-    - name: Building on ${{ runner.os }}-${{ runner.arch }}
+    - name: Building on ${{ runner.os }}-${{ runner.arch }} using Docker
       run: |
-        echo "TRIPLE=$(rustc -vV | sed -n 's|host: ||p')" >> $GITHUB_ENV
-        echo ${{ env.TRIPLE }}
-        cargo build --release
-        # cargo build --release --target x86_64-unknown-linux-musl
+        cat Dockerfile
       shell: bash
-    - name: Archive compilation target for ${{ matrix.os }}-${{ matrix.version }}
-      uses: actions/upload-artifact@v4
-      with:
-        name: hellow-${{ env.TRIPLE }}
-        if-no-files-found: ignore
-        path: |
-          target/release/hellow
-          target/release/hellow.exe
+
 
 
 
