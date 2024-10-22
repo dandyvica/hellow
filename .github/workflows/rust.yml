@@ -24,7 +24,17 @@ jobs:
     - name: Building on ${{ runner.os }}-${{ runner.arch }} using Docker
       run: |
         cat Dockerfile
-      shell: bash
+        docker build -t hellow .
+        docker run --name hellow hellow
+        docker cp hellow:/hellow/target/release/hellow .
+    - name: Archive compilation target for ${{ matrix.os }}-${{ matrix.version }}
+      uses: actions/upload-artifact@v4
+      with:
+        name: hellow
+        if-no-files-found: ignore
+        path: |
+          hellow
+
 
 
 
