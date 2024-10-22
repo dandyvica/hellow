@@ -45,10 +45,10 @@ jobs:
     - name: Building using Docker
       run: |
         cat Dockerfile
-        docker build -t hellow --platfrom "linux/arm64" --build-arg IMAGE="arm64v8/alpine" .
+        docker build -t hellow --platform "linux/arm64" --build-arg IMAGE="arm64v8/alpine" .
         docker run --name hellow hellow
         docker cp hellow:/hellow/target/release/hellow .
-        
+
     - name: Create artifact
       uses: actions/upload-artifact@v4
       with:
