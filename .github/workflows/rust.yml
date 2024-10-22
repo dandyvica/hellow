@@ -24,13 +24,12 @@ jobs:
     - uses: dtolnay/rust-toolchain@master
       with:
         toolchain: stable
-        targets: x86_64-unknown-linux-gnu,x86_64-unknown-linux-musl
+        # targets: x86_64-unknown-linux-gnu,x86_64-unknown-linux-musl
     - name: Building on ${{ runner.os }}-${{ runner.arch }}
       run: |
         echo "TRIPLE=$(rustc -vV | sed -n 's|host: ||p')" >> $GITHUB_ENV
         echo ${{ env.TRIPLE }}
         cargo build --release
-        ls -al 
         # cargo build --release --target x86_64-unknown-linux-musl
       shell: bash
     - name: Archive compilation target for ${{ matrix.os }}-${{ matrix.version }}
