@@ -1,4 +1,5 @@
-FROM alpine
+ARG IMAGE
+FROM $IMAGE
 
 RUN <<EOF
 apk add git

@@ -20,14 +20,39 @@ jobs:
     - name: Building using Docker
       run: |
         cat Dockerfile
-        docker build -t hellow .
+        docker build -t hellow --build-arg IMAGE=alpine .
         docker run --name hellow hellow
         docker cp hellow:/hellow/target/release/hellow .
 
-    - name: Archive compilation target for ${{ matrix.os }}-${{ matrix.version }}
+    - name: Create artifact
       uses: actions/upload-artifact@v4
       with:
-        name: hellow
+        name: hellow-x86
+        if-no-files-found: ignore
+        path: |
+          hellow
+
+  build_arm64_musl:
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Checkout repo
+      uses: actions/checkout@v4
+
+    - name: Install Qemu
+      uses: docker/setup-qemu-action@v3
+
+    - name: Building using Docker
+      run: |
+        cat Dockerfile
+        docker build -t hellow --platfrom "linux/arm64" --build-arg IMAGE="arm64v8/alpine" .
+        docker run --name hellow hellow
+        docker cp hellow:/hellow/target/release/hellow .
+        
+    - name: Create artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: hellow-arm64
         if-no-files-found: ignore
         path: |
           hellow
