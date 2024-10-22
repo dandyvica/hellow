@@ -15,7 +15,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest]
+        os: [ubuntu-latest, windows-latest, macos-latest]
         toolchain:
           - stable
 
@@ -30,17 +30,14 @@ jobs:
         ls -al >foo
         echo "TRIPLE=$(rustc -vV | sed -n 's|host: ||p')" >> $GITHUB_ENV
         echo ${{ env.TRIPLE }}
-        # cargo build --release
+        cargo build --release
         # cargo build --release --target x86_64-unknown-linux-musl
-        # export TRIPLE=$(rustc -vV | sed -n 's|host: ||p')
-        # echo "TRIPLE=$(rustc -vV | sed -n 's|host: ||p')" >> $GITHUB_ENV
-        # echo $TRIPLE
       shell: bash
     - name: Archive compilation target for ${{ matrix.os }}-${{ matrix.version }}
       uses: actions/upload-artifact@v4
       with:
-        name: foo-${{ env.TRIPLE }}
-        path: foo
+        name: hellow-${{ env.TRIPLE }}
+        path: target/release/hellow
 
 
 
