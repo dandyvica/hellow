@@ -1,4 +1,4 @@
-name: Rust
+name: Build hellow binaries
 
 on:
   push:
@@ -10,23 +10,20 @@ env:
   CARGO_TERM_COLOR: always
 
 jobs:
-  build:
-
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
-        toolchain:
-          - stable
-
+  build_x86_musl:
+    runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-    - name: Building on ${{ runner.os }}-${{ runner.arch }} using Docker
+
+    - name: Checkout repo
+      uses: actions/checkout@v4
+
+    - name: Building using Docker
       run: |
         cat Dockerfile
         docker build -t hellow .
         docker run --name hellow hellow
         docker cp hellow:/hellow/target/release/hellow .
+
     - name: Archive compilation target for ${{ matrix.os }}-${{ matrix.version }}
       uses: actions/upload-artifact@v4
       with:
