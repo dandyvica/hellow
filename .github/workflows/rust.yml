@@ -37,7 +37,9 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: hellow-${{ env.TRIPLE }}
-        path: target/release/hellow
+        path: |
+          target/release/hellow
+          target/release/hellow.exe
 
 
 
