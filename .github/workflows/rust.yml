@@ -29,7 +29,7 @@ jobs:
       run: |
         ls -al
         echo "TRIPLE=$(rustc -vV | sed -n 's|host: ||p')" >> $GITHUB_ENV
-        echo $TRIPLE
+        echo ${{ env.TRIPLE }}
         # cargo build --release
         # cargo build --release --target x86_64-unknown-linux-musl
         # export TRIPLE=$(rustc -vV | sed -n 's|host: ||p')
