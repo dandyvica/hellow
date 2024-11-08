@@ -24,6 +24,7 @@ jobs:
     - name: Build
       run: |
         resolvectl status
+        cat /run/systemd/resolve/resolv.conf
 
 
 
