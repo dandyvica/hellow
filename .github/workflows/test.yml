@@ -24,6 +24,7 @@ jobs:
     - name: Build
       run: |
         cat /etc/systemd/resolved.conf
+        ls -al /etc/resolvconf/resolv.conf.d
         # ls -al
         # pwd
         # cargo build --release
