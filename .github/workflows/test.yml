@@ -23,7 +23,7 @@ jobs:
     - uses: actions/checkout@v4
     - name: Build
       run: |
-        cat /etc/resolv.conf
+        cat /etc/systemd/resolved.conf
         # ls -al
         # pwd
         # cargo build --release
