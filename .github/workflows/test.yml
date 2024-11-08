@@ -1,0 +1,36 @@
+name: Rust
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        toolchain:
+          - stable
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build
+      run: |
+        cat /etc/resolv.conf
+        # ls -al
+        # pwd
+        # cargo build --release
+        # cargo build --release --target x86_64-unknown-linux-musl
+        # export TRIPLE=$(rustc -vV | sed -n 's|host: ||p')
+        # echo $TRIPLE >> $GITHUB_ENV
+
+
+
+
